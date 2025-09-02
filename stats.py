@@ -5,15 +5,34 @@ def get_num_words(book_text):
 
 #get character counts for each character in the text
 def get_char_counts(book_text):
-    #convert to lower case
     book_text = book_text.lower()
-
-    #store char:count pairs
     counts = {}
     for char in book_text:
         if char not in counts:
             counts[char] = 1
         else:
             counts[char] = counts[char]+1
-
     return counts
+
+#generate individual dictionaries for each 
+def generate_individual_char_counts(counts):
+    individual_counts = []
+
+    for c in counts:
+        next_count = {}
+        next_count["char"] = c
+        next_count["num"] = counts[c]
+        individual_counts.append(next_count)
+
+    return individual_counts
+
+def sort_on_num_key(items):
+    return items["num"]
+
+#sort a single dictionary based on individual character counts
+def sort_char_counts(unsorted_counts):
+    individual_counts = generate_individual_char_counts(unsorted_counts)
+    individual_counts.sort(reverse=True, key=sort_on_num_key)
+
+    return individual_counts
+
