@@ -4,7 +4,7 @@ def get_num_words(book_text):
     return word_count
 
 #get character counts for each character in the text
-def get_char_counts(book_text):
+def get_char_counts(book_text, verbose=False):
     punctuation_marks = set(['.', '?', '!', ':', ';', '-', ',', '\'', '\"'])
     book_text = book_text.lower()
 
@@ -15,7 +15,12 @@ def get_char_counts(book_text):
                 counts['space'] = 1
             else:
                 counts['space'] += 1
-        elif not char.isalpha():
+        elif char == '\n':
+            if 'newline' not in counts:
+                counts['newline'] = 1
+            else:
+                counts['newline'] += 1
+        elif not verbose and not char.isalpha():
             if 'punctuation' not in counts:
                 counts['punctuation'] = 1
             else:

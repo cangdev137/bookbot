@@ -25,22 +25,32 @@ def print_report(relative_path, word_count, char_counts):
     return
 
 def main():
-    #verify that user attached a book to analyze
-    if len(sys.argv) != 2:
-        print("Incorrect command usage. please include a path to your book.")
-        print("Usage: python3 main.py <path_to_book>")
-        sys.exit(1)
+    book_path = ""
+    want_verbose_count = False
 
-    book_path = sys.argv[1]
+    #verify that user attached a book to analyze
+    if len(sys.argv) < 2:
+        print("Incorrect command usage. please include a path to your book.")
+        print("Usage: python3 main.py [flags] <path_to_book>")
+        sys.exit(1)
+    
+    #check for any flags
+    if len(sys.argv) > 2:
+        if "-v" in sys.argv:
+            want_verbose_count = True
+        #other flags
+        #TODO
 
     #check that file exists
+    book_path = sys.argv[-1]
     if not os.path.isfile(book_path):
         print(f"'{book_path}' does not exist or is not a file.")
+        print(f"Usage: python3 main.py [flags] <path_to_book>")
         sys.exit(1)
 
     book_text = get_book_text(book_path)
     num_words = get_num_words(book_text)
-    char_counts = get_char_counts(book_text)
+    char_counts = get_char_counts(book_text, verbose=want_verbose_count)
 
     print_report(book_path, num_words, char_counts)
 
