@@ -1,4 +1,5 @@
 import sys
+import os
 from stats import get_num_words, get_char_counts, sort_char_counts
 
 #get the contents of a book using its relative file path
@@ -24,9 +25,18 @@ def print_report(relative_path, word_count, char_counts):
     return
 
 def main():
-    DIRECTORY_PATH= "books/"
-    book_title = "frankenstein"
-    book_path = f"{DIRECTORY_PATH}{book_title}.txt"
+    #verify that user attached a book to analyze
+    if len(sys.argv) != 2:
+        print("Incorrect command usage. please include a path to your book.")
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    book_path = sys.argv[1]
+
+    #check that file exists
+    if not os.path.isfile(book_path):
+        print(f"'{book_path}' does not exist or is not a file.")
+        sys.exit(1)
 
     book_text = get_book_text(book_path)
     num_words = get_num_words(book_text)
