@@ -1,20 +1,26 @@
+#return the individual words of the book text
+def get_words(book_text):
+    return book_text.split()
+
 #count the number of words in a string of book text
 def get_num_words(book_text):
     word_count = len(book_text.split())
     return word_count
 
+def get_avg_word_length(book_words):
+    pass
+
 #get character counts for each character in the text
-def get_char_counts(book_text, verbose=False):
-    punctuation_marks = set(['.', '?', '!', ':', ';', '-', ',', '\'', '\"'])
-    book_text = book_text.lower()
+def get_char_counts(book_words, verbose=False):
+    book_words = book_words.lower()
 
     counts = {}
-    for char in book_text:
+    for char in book_words:
         if char == ' ':
-            if 'space' not in counts:
-                counts['space'] = 1
+            if 'spaces' not in counts:
+                counts['spaces'] = 1
             else:
-                counts['space'] += 1
+                counts['spaces'] += 1
         elif char == '\n':
             if 'newline' not in counts:
                 counts['newline'] = 1
@@ -31,7 +37,7 @@ def get_char_counts(book_text, verbose=False):
             counts[char] += 1
     return counts
 
-#generate individual dictionaries for each 
+#generate individual dictionaries for each word count and put into a list
 def generate_individual_char_counts(counts):
     individual_counts = []
 
@@ -54,10 +60,6 @@ def sort_char_counts(unsorted_counts):
 
 #return total character counts
 def get_total_char_count(sorted_char_counts):
-    ''' 
-        param: [dicts]
-        rtype: int 
-    '''
     total = 0
     for count in sorted_char_counts:
         total += count["num"]

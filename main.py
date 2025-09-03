@@ -1,6 +1,6 @@
 import sys
 import os
-from stats import *
+from report import print_report
 
 #get the contents of a book using its relative file path
 def get_book_text(file_path):
@@ -9,56 +9,40 @@ def get_book_text(file_path):
         file_contents = f.read()
     return file_contents
 
-#print report on text data
-def print_report(path, word_count, char_counts):
-    total_lines = 0
-
-    print("============ BOOKBOT ============")
-    print(f"Analyzing book found at {path}...")
-    print(" ----------- Word Count ----------")
-    print(f"Found {word_count} total words.")
-
-    print("--------- Character Count -------")
-    print(f"Found {get_total_char_count(char_counts)} total characters.")
-    for count in char_counts:
-        #don't display newline count. this will be used later
-        if count['char'] == "newline":
-            total_lines = count['num']
-            continue
-        print(f"{count['char']}: {count['num']}")
-
-    print("--------- Line Count -------")
-    print(f"Found {total_lines} total lines.")
-
-    return
-
 def main():
-    book_path = ""
-    want_verbose_count = False
+    file_path= ""
+    want_verbose_report = False
+    want_truncated_counts = False
+    max_char_counts = 1000
 
     #verify that user attached a book to analyze
     if len(sys.argv) < 2:
         print("Incorrect command usage. please include a path to your book.")
-        print("Usage: python3 main.py [flags] <path_to_book>")
+        print("Usage: ./bookbot.sh [flags] <path_to_book>")
         sys.exit(1)
     
     #check for any flags
     if len(sys.argv) > 2:
+        #remove umbrella "punctuation" term from character counts
         if "-v" in sys.argv:
-            want_verbose_count = True
-        #other flags
-        #TODO
-
+            want_verbose_report = True
+        #truncate character counts
+        if "-n" in sys.argv:
+            want_truncated_counts = True
+            #get number of counts to print from next argument
+            max_char_counts = int(sys.argv[sys.argv.index("-n")+1])
+    
     #check that file exists
-    book_path = sys.argv[-1]
-    if not os.path.isfile(book_path):
-        print(f"'{book_path}' does not exist or is not a file.")
-        print(f"Usage: python3 main.py [flags] <path_to_book>")
+    file_path= sys.argv[-1]
+    if not os.path.isfile(file_path):
+        print(f"'{file_path}' does not exist or is not a file.")
+        print("Usage: ./bookbot.sh [flags] <path_to_book>")
         sys.exit(1)
 
-    book_text = get_book_text(book_path)
-    num_words = get_num_words(book_text)
-    char_counts = sort_char_counts(get_char_counts(book_text, verbose=want_verbose_count))
-    print_report(book_path, num_words, char_counts)
+    #extract the text from the file
+    book_text = get_book_text(file_path)
+
+    #print stats
+    print_report(file_path, book_text, want_verbose_report, want_truncated_counts, max_char_counts)
 
 main()
