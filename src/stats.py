@@ -2,7 +2,7 @@ import re
 
 #return the individual words of the book text
 def get_words(book_text):
-    return re.findall(r"[A-Za-z]+(?:'[A-Za-z]+)?", book_text.lower())
+    return book_text.split()
 
 #return average word length, longest and shortest word lengths
 def get_word_length_stats(book_words):
@@ -36,7 +36,7 @@ def get_char_counts(book_words, verbose=False):
                 counts['spaces'] = 1
             else:
                 counts['spaces'] += 1
-        elif char == '\n':
+        elif char == '\n' or char == '\r':
             if 'newline' not in counts:
                 counts['newline'] = 1
             else:
@@ -65,11 +65,9 @@ def generate_individual_char_counts(counts):
     return individual_counts
 
 #sort a single dictionary based on individual character counts
-def sort_on_num_key(items):
-    return items["num"]
 def sort_char_counts(unsorted_counts):
     individual_counts = generate_individual_char_counts(unsorted_counts)
-    individual_counts.sort(reverse=True, key=sort_on_num_key)
+    individual_counts.sort(reverse=True, key=lambda count: count["num"])
 
     return individual_counts
 

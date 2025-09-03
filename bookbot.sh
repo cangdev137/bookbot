@@ -55,4 +55,4 @@ for arg in "$@"; do
     esac
 done
 
-exec python3 main.py "${verbose_arg}" "${truncated_arg}" "${max_lines_arg}" "$file"
+exec python3 ./src/main.py "${verbose_arg}" "${truncated_arg}" "${max_lines_arg}" "$file"
