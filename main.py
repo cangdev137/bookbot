@@ -11,14 +11,25 @@ def get_book_text(file_path):
 
 #print report on text data
 def print_report(path, word_count, char_counts):
+    total_lines = 0
+
     print("============ BOOKBOT ============")
     print(f"Analyzing book found at {path}...")
     print(" ----------- Word Count ----------")
     print(f"Found {word_count} total words.")
+
     print("--------- Character Count -------")
     print(f"Found {get_total_char_count(char_counts)} total characters.")
     for count in char_counts:
+        #don't display newline count. this will be used later
+        if count['char'] == "newline":
+            total_lines = count['num']
+            continue
         print(f"{count['char']}: {count['num']}")
+
+    print("--------- Line Count -------")
+    print(f"Found {total_lines} total lines.")
+
     return
 
 def main():
