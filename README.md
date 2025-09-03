@@ -1,6 +1,6 @@
 # bookbot
 
-bookbot is a project inspired by [Boot.dev](https://www.boot.dev).
+bookbot is a simple personal project inspired by [Boot.dev](https://www.boot.dev).
 
 bookbot can be used to analyze text files and report on the contents. commands generally take the following form:
 ```
