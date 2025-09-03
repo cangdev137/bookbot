@@ -20,14 +20,13 @@ def print_report(path, book_text, want_verbose_report=False, want_truncated_coun
     print(f"Shortest word is {len(shortest_word)} chars long. ({shortest_word})")
     print(f"Longest word is {len(longest_word)} chars long. ({longest_word})")
 
-
+    total_char_count = get_total_char_count(char_counts)
     print("--------- Character Counts -------")
-    print(f"Found {get_total_char_count(char_counts)} total characters.")
+    print(f"Found {total_char_count} total characters.")
     print("Individual character counts", end="")
     if want_truncated_counts:
         print(f" (truncated to top {max_char_counts} chars)", end="")
     print(" are:")
-
     printed_counts = 1 
     for count in char_counts:
         #don't display newline count. this will be used later
@@ -37,7 +36,8 @@ def print_report(path, book_text, want_verbose_report=False, want_truncated_coun
         #exit early if count should be truncated
         if want_truncated_counts and printed_counts > max_char_counts:
             break
-        print(f"\t{count['char']}: {count['num']}")
+        percentage_of_total_chars = (count['num'] / total_char_count * 100)
+        print(f"\t{count['char']}: {count['num']} ({percentage_of_total_chars:.2f}%)")
         printed_counts += 1
 
     print("--------- Line Count -------")
