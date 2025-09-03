@@ -1,12 +1,6 @@
 #!/bin/bash
 #call the bookbot
 
-if [ "$#" -eq 0 ]; then
-    echo "Error: no text file was provided." >&2
-    echo "Usage: $0 [flags] <path_to_text_file>" >&2
-    exit 1
-fi
-
 verbose=false
 while getopts "v" flag; do
     case "${flag}" in 

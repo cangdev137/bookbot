@@ -52,3 +52,15 @@ def sort_char_counts(unsorted_counts):
 
     return individual_counts
 
+#return total character counts
+def get_total_char_count(sorted_char_counts):
+    ''' 
+        param: [dicts]
+        rtype: int 
+    '''
+    total = 0
+    for count in sorted_char_counts:
+        total += count["num"]
+    return total
+
+
