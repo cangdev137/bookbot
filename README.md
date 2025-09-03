@@ -21,7 +21,7 @@ to disable this, use the '-v' flag:
 
 sometimes, there are many unique alphanumeric characters.
 this can make the character count portion of the report lengthy. 
-the '-n' flag can be used to truncate the character count section to display only the top n most common characters.
+the '-n' flag can be used to truncate the character count section to display only the top *n* most common characters.
 For example, the following truncates the character counts to only display the top 10 characters:
 ```
 ./bookbot.sh -n 10 book.txt

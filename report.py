@@ -14,6 +14,7 @@ def print_report(path, book_text, want_verbose_report=False, want_truncated_coun
     print(f"Analyzing book found at {path}...")
     print(" ----------- Word Count ----------")
     print(f"Found {num_words} total words.")
+    print(f"Text averages {get_avg_word_length(individual_words)} chars per word.")
 
     print("--------- Character Counts -------")
     print(f"Found {get_total_char_count(char_counts)} total characters.")

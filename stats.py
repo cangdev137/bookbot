@@ -2,13 +2,17 @@
 def get_words(book_text):
     return book_text.split()
 
-#count the number of words in a string of book text
-def get_num_words(book_text):
-    word_count = len(book_text.split())
-    return word_count
-
 def get_avg_word_length(book_words):
-    pass
+    sum_lengths = 0
+    num_words = 0
+    for word in book_words:
+        next_length = len(word)
+        #ignore punctuation characters
+        if next_length == 1 and not word.isalnum():
+            continue
+        sum_lengths += next_length
+        num_words += 1
+    return sum_lengths / num_words
 
 #get character counts for each character in the text
 def get_char_counts(book_words, verbose=False):
