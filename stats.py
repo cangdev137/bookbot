@@ -1,18 +1,29 @@
+import re
+
 #return the individual words of the book text
 def get_words(book_text):
-    return book_text.split()
+    return re.findall(r"[A-Za-z]+(?:'[A-Za-z]+)?", book_text.lower())
 
-def get_avg_word_length(book_words):
+#return average word length, longest and shortest word lengths
+def get_word_length_stats(book_words):
+    longest_word = ""
+    shortest_word = book_words[0] if len(book_words) > 0 else ""
     sum_lengths = 0
     num_words = 0
-    for word in book_words:
-        next_length = len(word)
+    for current_word in book_words:
+        next_length = len(current_word)
         #ignore punctuation characters
-        if next_length == 1 and not word.isalnum():
+        if next_length == 1 and (not current_word.isalnum() or current_word == " "):
             continue
+        if next_length > len(longest_word):
+            longest_word = current_word
+        if next_length < len(shortest_word):
+            shortest_word = current_word
+
+        #contribute to average
         sum_lengths += next_length
         num_words += 1
-    return sum_lengths / num_words
+    return (sum_lengths/num_words), shortest_word, longest_word
 
 #get character counts for each character in the text
 def get_char_counts(book_words, verbose=False):
