@@ -2,11 +2,10 @@
 
 bookbot is a simple personal project inspired by [Boot.dev](https://www.boot.dev).
 
-to try the tool out, use the following commands:
+to try the tool out, install the source code and bash script using the following commands:
 ```
 git clone https://cangdev137/bookbot.git
 cd bookbot
-./bookbot.sh
 ```
 
 bookbot allows you to analyze a text file and generates a report on the total word count, line count, and individualized character counts.
