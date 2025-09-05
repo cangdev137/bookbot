@@ -2,15 +2,17 @@
 
 bookbot is a simple personal project inspired by [Boot.dev](https://www.boot.dev).
 
-bookbot can be used to analyze text files and report on the contents. commands generally take the following form:
+to try the tool out, use the following commands:
 ```
-./bookbot.sh [flags] book.txt
+git clone https://cangdev137/bookbot.git
+cd bookbot
+./bookbot.sh
 ```
 
-by default, bookbot generates a simple report containing the total word count
-and individualized character counts. the simplest possible invocation is: 
+bookbot allows you to analyze a text file and generates a report on the total word count, line count, and individualized character counts.
+to generate the default report, run the following command:
 ```
-/bookbot.sh book.txt
+./bookbot.sh book.txt
 ```
 
 bookbot automatically groups punctuation symbols (any non-alphanumeric characters) into an umbrella "punctuation" term.

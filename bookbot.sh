@@ -39,7 +39,7 @@ for arg in "$@"; do
             continue
             ;;
         -*)
-            echo "UNRECOGNIZED FLAG" >&2;
+            echo "Error: Unrecognized flag." >&2;
             echo "Usage: $0 [flag] <path_to_txt_file>" >&2;
             exit 1;
             ;;
@@ -47,7 +47,7 @@ for arg in "$@"; do
             if [ -z "$file" ]; then
                 file="$arg";
             else
-                echo "Too many arguments" >&2;
+                echo "Error: Too many arguments." >&2;
                 echo "Usage: $0 [flag] <path_to_txt_file>" >&2;
                 exit 1
             fi

@@ -17,7 +17,7 @@ def main():
 
     #verify that user attached a book to analyze
     if len(sys.argv) < 2:
-        print("Incorrect command usage. please include a path to your book.")
+        print("Error: please include a path to your book.")
         print("Usage: ./bookbot.sh [flags] <path_to_book>")
         sys.exit(1)
     
@@ -35,7 +35,7 @@ def main():
     #check that file exists
     file_path= sys.argv[-1]
     if not os.path.isfile(file_path):
-        print(f"'{file_path}' does not exist or is not a file.")
+        print(f"Error: '{file_path}' does not exist or is not a file.")
         print("Usage: ./bookbot.sh [flags] <path_to_book>")
         sys.exit(1)
 
