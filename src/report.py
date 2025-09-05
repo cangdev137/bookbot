@@ -34,8 +34,12 @@ def print_report(path, book_text, want_verbose_report=False, want_truncated_coun
             continue
         #exit early if count should be truncated
         if not want_truncated_counts or printed_counts <= max_char_counts:
-            percentage_of_total_chars = (count['num'] / total_char_count * 100)
-            print(f"\t{count['char']}: {count['num']} ({percentage_of_total_chars:.2f}%)")
+            percentage_of_total_chars = (count['num']*100) / total_char_count 
+            print(f"\t{count['char']}: {count['num']}", end="")
+            if percentage_of_total_chars > 0.5:
+                print(f" ({percentage_of_total_chars:.2f}%)")
+            else:
+                print(f" ({percentage_of_total_chars:.4f}%)")
         printed_counts += 1
 
     print("--------- Line Count -------")
